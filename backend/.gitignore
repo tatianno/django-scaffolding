@@ -1,0 +1,13 @@
+venv/
+
+__pycache__/
+
+*.sqlite3
+
+src/static/
+src/mediafiles/
+
+# Arquivos de volume docker
+docker/mysql/
+docker/nginx/ssl/
+docker/letsencrypt

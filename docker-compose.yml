@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+
+ redis:
+  image: redis
+  container_name: redis
+  restart: always
+
+ db:
+  image: mysql
+  container_name: db
+  restart: always
+  volumes:
+   - ${MYSQL_DIR}:/var/lib/mysql
+  environment:
+   - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+   - MYSQL_DATABASE=${MYSQL_DATABASE}
+   - MYSQL_USER=${MYSQL_USER}
+   - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+ 
+ rabbitmq:
+  image: rabbitmq:3-management
+  environment:
+   - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+   - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+
+ backend:
+  image: django-app
+  container_name: backend
+  restart: always
+  environment:
+   - SECRET_KEY=${SECRET_KEY}
+   - REDIS_SERVER=${REDIS_SERVER}
+   - MYSQL_HOST=${MYSQL_HOST}
+   - MYSQL_DATABASE=${MYSQL_DATABASE}
+   - MYSQL_USER=${MYSQL_USER}
+   - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+   - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+   - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+  volumes:
+   - ${BACKEND_DIR}:/usr/src/webapps
+  depends_on:
+   - rabbitmq
+   - db
+   - redis
+
+ frontend:
+  image: nextjs-app
+  container_name: frontend
+  restart: always
+  volumes:
+   - ${FRONTEND_DIR}:/app
+
+ nginx:
+  image: nginx-app
+  ports:
+   - "80:80"
+   - "443:443"
+  volumes:
+   - ${NGINX_DIR}/conf.d:/etc/nginx/conf.d
+   - ${NGINX_DIR}/ssl/certs:/etc/nginx/ssl/certs
+   - ${NGINX_DIR}/ssl/private:/etc/nginx/ssl/private
+   - ${BACKEND_DIR}/static:/webapps/static
+   - ${BACKEND_DIR}/mediafiles:/webapps/mediafiles
+  depends_on:
+   - backend
+   - frontend

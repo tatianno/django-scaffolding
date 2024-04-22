@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>APP</title>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+      <main class="container-fluid ">
+          <section class="row justify-content-end">
+              <div class="col-md-6">
+              </div>
+              <div class="col-md-3" style="margin:13% 5%">
+              {% if form.errors %}
+                <p>Os dados informados não são válidos!</p>
+              {% endif %}
+
+              {% if next %}
+                  {% if user.is_authenticated %}
+                    <p>Você não possui privilégio para acessar essa área.</p>
+                  {% endif %}
+              {% endif %}
+
+              <div>
+                <a class="hiddenanchor" id="signup"></a>
+                <a class="hiddenanchor" id="signin"></a>
+                <div class="login_wrapper">
+                  <div class="animate form login_form">
+                    <section class="login_content">
+                      <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div>
+                          {{ form.username }}
+                        </div>
+                        <div>				  
+                          {{ form.password }}
+                        </div>
+                        <br>
+                        <input type="submit" class="btn btn-primary col-md-6" value="Entrar">
+                        <input type="hidden" name="next" value="{{ next }}">
+                      </form>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+      </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>   
+  </body>
+</html>
