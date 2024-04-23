@@ -1,5 +1,9 @@
-# Configuração do arquivo .env
+# Scaffoding para projetos BACKEND e FRONTEND com Django e Nextjs
 
+
+## Arquivo .env
+
+```
 SECRET_KEY=<SECRET KEY>
 
 MYSQL_HOST=<HOST>
@@ -18,3 +22,4 @@ NGINX_DIR=/usr/src/django-scaffod/backend/docker/nginx
 LETS_ENCRYPT_DIR=/usr/src/django-scaffod/backend/docker/letsencrypt
 BACKEND_DIR=/usr/src/django-scaffod/backend/src
 FRONTEND_DIR=/usr/src/django-scaffod/frontend
+```
