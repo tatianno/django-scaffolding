@@ -1,5 +1,1 @@
 .env
-
-# Arquivos de volume docker
-backend/docker/data/
-backend/docker/letsencrypt
