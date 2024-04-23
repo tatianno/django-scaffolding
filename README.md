@@ -1,4 +1,4 @@
-# Scaffoding para projetos BACKEND e FRONTEND com Django e Nextjs
+# Scaffoding para projeto com Django e Nextjs
 
 
 ## Arquivo .env
