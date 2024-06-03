@@ -66,3 +66,10 @@ services:
   depends_on:
    - backend
    - frontend
+  
+ prometheus:
+  image: prom/prometheus
+  container_name: prometheus
+  restart: always
+  volumes:
+    - ${SRE_DIR}/prometheus.yml:/etc/prometheus/prometheus.yml

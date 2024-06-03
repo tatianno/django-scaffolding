@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth.views import LoginView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -42,5 +42,6 @@ urlpatterns += [
     path('accounts/login/', LoginView.as_view(), name='login'),
     path('accounts/logout/', logout_view, name='logout'),
     path('documentacao/swagger/', schema_view_redoc.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('documentacao/', schema_view_redoc.with_ui('redoc', cache_timeout=0), name='schema-redoc')
+    path('documentacao/', schema_view_redoc.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('', include('django_prometheus.urls')),
 ]
