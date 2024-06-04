@@ -23,4 +23,8 @@ NGINX_DIR=/usr/src/django-scaffod/backend/docker/nginx
 LETS_ENCRYPT_DIR=/usr/src/django-scaffod/backend/docker/letsencrypt
 BACKEND_DIR=/usr/src/django-scaffod/backend/src
 FRONTEND_DIR=/usr/src/django-scaffod/frontend
+ROMETHEUS_DIR=/usr/src/django-scaffod/sre/prometheus
+GRAFANA_DIR=/usr/src/django-scaffod/sre/grafana
+UID=1000
+GID=1000
 ```
