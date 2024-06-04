@@ -71,5 +71,19 @@ services:
   image: prom/prometheus
   container_name: prometheus
   restart: always
+  user: "${UID}:${GID}"
   volumes:
-    - ${SRE_DIR}/prometheus.yml:/etc/prometheus/prometheus.yml
+    - ${PROMETHEUS_DIR}/prometheus.yml:/etc/prometheus/prometheus.yml
+    - ${PROMETHEUS_DIR}/data:/prometheus
+
+ grafana:
+  image: grafana/grafana-enterprise
+  container_name: grafana
+  ports:
+   - "3030:3000"
+  restart: always
+  volumes:
+   - ${GRAFANA_DIR}:/var/lib/grafana
+  user: "${UID}:${GID}"
+  depends_on:
+   - prometheus

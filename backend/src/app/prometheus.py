@@ -1,5 +1,4 @@
 from django_prometheus.middleware import PrometheusBeforeMiddleware, PrometheusAfterMiddleware
-from django.utils.deprecation import MiddlewareMixin
 
 
 class CustomPrometheusBeforeMiddleware(PrometheusBeforeMiddleware):

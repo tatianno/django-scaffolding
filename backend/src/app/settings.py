@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'mptt',
     'drf_yasg',
-    'django_prometheus'
+    'django_prometheus',
+    'aluno'
 ]
 
 MIDDLEWARE = [
@@ -102,7 +103,7 @@ REDIS_SERVER = {
 if os.environ.get('MYSQL_DATABASE'):
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
+            'ENGINE': 'django_prometheus.db.backends.mysql',
             'NAME': os.environ.get('MYSQL_DATABASE'),
             'USER': os.environ.get('MYSQL_USER'),
             'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
